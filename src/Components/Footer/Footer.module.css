@@ -1,0 +1,26 @@
+.root{
+    display: flex;
+    background-color: #002855;
+    font-size: 13px;
+    justify-content: space-around;
+    padding: 50px;
+}
+.iconsStyle{
+    border: 1px solid white;
+    padding: 5px;
+    border-radius: 25px;
+    width: 35.6px;
+    height: 35.6px;
+    margin-left: 10px;
+}
+.listStyle{
+    color: white;
+    list-style-type: none;
+}
+.listStyle li{
+    padding-bottom: 30px;
+}
+.iconsDiv{
+    display: flex;
+    align-items: center;
+}

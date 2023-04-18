@@ -54,6 +54,7 @@ export default function Navbar() {
 
         </div>
       </div>
+      <div style={{border:"1px solid gray",padding:"5px"}}>
       <div className={style.menulistDiv}>
         <Menu isOpen={isOpen}>
           <Link to='/newin'><MenuButton
@@ -204,6 +205,7 @@ export default function Navbar() {
             <Link to='#'><MenuItem>SLEEPWEAR</MenuItem></Link>
           </MenuList>
         </Menu>
+      </div>
       </div>
     </div>
   )

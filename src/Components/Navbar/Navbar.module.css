@@ -1,0 +1,9 @@
+.menulistDiv{
+    display: flex;
+    justify-content: space-around;
+    width: 55%;
+    margin: auto;
+    font-size: 12px;
+    font-weight: bolder;
+    border: none;
+}

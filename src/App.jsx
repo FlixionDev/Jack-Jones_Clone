@@ -4,13 +4,11 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
+import Router from './Components/Routes/Router'
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
-     <Navbar />
-     <Footer />
+     <Router/>
     </div>
   )
 }

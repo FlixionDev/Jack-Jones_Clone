@@ -31,12 +31,12 @@ export default function Navbar() {
   const { isOpen: saleisOPen, onOpen: saleonOpen, onClose: saleonClose } = useDisclosure();
   const { isOpen: kidsisOPen, onOpen: kidsonOpen, onClose: kidsonClose } = useDisclosure();
   return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: "space-between", alignItems: "center", padding: "15px 15px" }}>
+    <div className={style.NavbarDiv}>
+      <div className={style.NavbarUpperSection}>
         <div>
           <Link to='/'><img style={{ width: '150px' }} src={first_img} /></Link>
         </div>
-        <div style={{ display: 'flex', justifyContent: "space-around", width: "40%" }}>
+        <div className={style.NavbarUpperSectionRightPart}>
           <div>
             <img style={{ width: '150px' }} src={second_img} />
           </div>

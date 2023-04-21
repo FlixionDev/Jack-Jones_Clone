@@ -28,7 +28,8 @@ import Insta from './images/Insta.avif'
 export default function LandingPage() {
     let arr1 = [r11, r12, r13];
     let arr3 = [denimjacket, innerwear, cap, sneaker]
-    let arr4 = [jeanfit1, jeanfit2, jeanfit3, jeanfit4, jeanfit5, jeanfit6]
+    let arr4 = [jeanfit1, jeanfit2, jeanfit3, jeanfit4, jeanfit5, jeanfit6];
+    //https://jackandjones.onrender.com
     let arr5=[ExploreMoreBrands1,ExploreMoreBrands2,ExploreMoreBrands3,ExploreMoreBrands4,ExploreMoreBrands5]
     const [jeanfit, setJeanfit] = useState(0);
     const [state, setState] = useState(0);

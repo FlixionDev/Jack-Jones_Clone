@@ -6,3 +6,19 @@
     font-size: 12px;
     font-weight: bolder;
 }
+.NavbarDiv{
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+.NavbarUpperSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 15px;
+}
+.NavbarUpperSectionRightPart{
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}

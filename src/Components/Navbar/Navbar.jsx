@@ -93,7 +93,7 @@ export default function Navbar() {
             </MenuList>
           </Menu>
           <Menu isOpen={clothisOpen}>
-            <Link to='/clothing'><MenuButton
+            <Link to='/clothings'><MenuButton
               onMouseEnter={clothonOpen}
               onMouseLeave={clothonClose}
             >
@@ -114,7 +114,7 @@ export default function Navbar() {
             </MenuList>
           </Menu>
           <Menu isOpen={footisOPen}>
-            <Link to='/footwear'><MenuButton
+            <Link to='/footwears'><MenuButton
               onMouseEnter={footonOpen}
               onMouseLeave={footonClose}
             >
@@ -149,7 +149,7 @@ export default function Navbar() {
             </MenuList>
           </Menu>
           <Menu isOpen={innerisOPen}>
-            <Link to='/innerwear'><MenuButton
+            <Link to='/innerwears'><MenuButton
               onMouseEnter={inneronOpen}
               onMouseLeave={inneronClose}
             >
@@ -164,7 +164,7 @@ export default function Navbar() {
             </MenuList>
           </Menu>
           <Menu isOpen={loungeisOPen}>
-            <Link to='/loungewear'><MenuButton
+            <Link to='/loungewears'><MenuButton
               onMouseEnter={loungeonOpen}
               onMouseLeave={loungeonClose}
             >
@@ -177,7 +177,7 @@ export default function Navbar() {
             </MenuList>
           </Menu>
           <Menu isOpen={saleisOPen}>
-            <Link to='/sale'><MenuButton
+            <Link to='/sales'><MenuButton
               onMouseEnter={saleonOpen}
               onMouseLeave={saleonClose}
             >

@@ -51,20 +51,6 @@ export default function Login() {
           <div style={{color:"#002855"}}>FORGOT PASSWORD</div>
           <div style={{color:"grey"}}>NOT REGISTERED USER?<Link to='/register' style={{color:'#002855'}}> SIGN UP</Link></div>
         </div>
-        {/* <div style={{display:'flex',background:"#f1f1f1",width:'90%',margin:'auto',marginTop:"15px",padding:"6px"}}>
-          <img style={{width:"35px",height:"35px"}} src={usericon} />
-          <input style={{width:'100%',backgroundColor:'#f1f1f1',border:"none",outline:'none',marginLeft:'15px'}} placeholder='Enter Your Name*' />
-        </div>
-        <div style={{display:'flex',background:"#f1f1f1",width:'90%',margin:'auto',marginTop:"15px",padding:"6px"}}><img style={{width:"35px",height:"35px"}} src={message} />
-          <input style={{width:'100%',backgroundColor:'#f1f1f1',border:"none",outline:'none',marginLeft:'15px'}} placeholder='Your Email Address*' /></div>
-        <div style={{display:'flex',background:"#f1f1f1",width:'90%',margin:'auto',marginTop:"15px",padding:"6px"}}><img style={{width:"35px",height:"35px"}} src={vib} />
-          <input style={{width:'100%',backgroundColor:'#f1f1f1',border:"none",outline:'none',marginLeft:'15px'}} placeholder='Mobile Number*' /></div>
-        <div style={{display:'flex',background:"#f1f1f1",width:'90%',margin:'auto',marginTop:"15px",padding:"6px"}}><img style={{width:"35px",height:"35px"}} src={lock} />
-          <input style={{width:'100%',backgroundColor:'#f1f1f1',border:"none",outline:'none',marginLeft:'15px'}} placeholder='Choose Password*' /></div>
-        <div style={{display:'flex',background:"#f1f1f1",width:'90%',margin:'auto',marginTop:"15px",padding:"6px"}}><img style={{width:"35px",height:"35px"}} src={calendar} />
-          <input type='date' style={{width:'100%',backgroundColor:'#f1f1f1',border:"none",outline:'none',marginLeft:'15px'}} placeholder='Date Of Birth*' /></div>
-        <div style={{width:'90%',border:"2px solid",margin:'auto',marginTop:'15px'}}><button style={{width:'100%',backgroundColor:'#002855',color:'white',padding:'6px'}}>Register</button></div>
-        <div style={{width:'90%',margin:'auto',marginTop:'15px',paddingBottom:'20px'}}><p style={{textAlign:'center'}}>ALREADY REGISTERED? <Link style={{color:'#002855 '}} to='/login'>LOG IN</Link></p></div> */}
       </div>
     </div>
   )

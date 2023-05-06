@@ -3,10 +3,6 @@ import ProductCard from '../../ProductCard/ProductCard';
 import style from './Accessories.module.css'
 import { useLocation } from 'react-router-dom';
 export default function Accessories() {
-  // const params=useParams();
-  const location=useLocation();
-  console.log(location)
-  // console.log(params)
   const [state, setState] = useState([]);
   useEffect(() => {
     fetchProduct("https://curious-hare-jewelry.cyclic.app/accessories");

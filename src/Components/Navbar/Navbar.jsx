@@ -70,7 +70,7 @@ export default function Navbar() {
       <div style={{ border: "1px solid gray", padding: "5px" }}>
         <div className={style.menulistDiv}>
           <Menu isOpen={isOpen}>
-            <Link to='/newin'><MenuButton
+            <Link to='/new_in'><MenuButton
               onMouseEnter={onOpen}
               onMouseLeave={onClose}
             >

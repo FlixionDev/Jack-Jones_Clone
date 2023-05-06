@@ -1,0 +1,32 @@
+.SignupContainer {
+    width: 30%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.pageTitle {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.innerDiv{
+    display: flex;
+    background: #f1f1f1;
+    width: 90%;
+    margin: auto;
+    margin-top: 15px;
+    padding: 6px;
+}
+.imgIcon{
+    width: 35px;
+    height: 35px;
+}
+.inputTag{
+    width: 100%;
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    margin-left: 15px;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {useParams} from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import style from './/ProductCard.module.css'
 export default function ProductCard({first_img,second_img,title,price,_id}) {
   const [state,setState]=useState(false)
   //console.log(props)

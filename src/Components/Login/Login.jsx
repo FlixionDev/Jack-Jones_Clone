@@ -9,8 +9,46 @@ import style from './Login.module.css'
 import many from './Icon/many.png'
 import fb from './Icon/fb.png'
 import google from './Icon/Google.svg.webp'
+import { useState } from 'react'
+import {  useDispatch } from 'react-redux'
+import { thunkUserLoginDone } from '../../Redux/Action/ThunkAction'
+import { bindActionCreators } from 'redux'
+import { useNavigate } from 'react-router-dom'
+import { useToast } from '@chakra-ui/react'
 export default function Login() {
-  const [state, setState] = React.useState(true);
+  const [state, setState] = React.useState(false);
+  const [credential, setCredential] = useState({});
+  const toast=useToast();
+  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  let isLoginAction = bindActionCreators(thunkUserLoginDone, dispatch);
+  const checkActionCreatedOnServer=()=>{
+    fetch(`https://curious-hare-jewelry.cyclic.app/users?email=${credential.email}`).then((res) => res.json()).then((res) => {
+      if (res.length > 0) {
+        // alert("Please enter correct password");
+        toast({ position:"top",description: 'Please enter correct password',status: "warning",isClosable:true })
+      }else{
+        //alert("No account find, Please create first")
+        toast({ position:"top",description: 'No account find, Please create first',status: "error",isClosable:true })
+        navigate("/register");
+      }
+    })
+  }
+  const submitDataForLogin = () => {
+    fetch(`https://curious-hare-jewelry.cyclic.app/users?email=${credential.email}&pass=${credential.pass}`).then((res) => res.json()).then((res) => {
+      if (res.length > 0) {
+        localStorage.setItem("isLogin", true)
+        localStorage.setItem("userDetails", JSON.stringify({ name: res[0].name, email: res[0].email, mobile: res[0].mobile }))
+        isLoginAction()
+        //alert(`Hey ${res[0].name}, Login successfull!`);
+        toast({ position:"top",description: `Hey ${res[0].name}, Login successfull!`,status: "success",isClosable:true })
+        navigate("/")
+      }else{
+        checkActionCreatedOnServer();
+      }
+    })
+
+  }
   return (
     <div>
       <div className={style.SignupContainer}>
@@ -22,7 +60,7 @@ export default function Login() {
         <div>
           <img src={many} style={{ width: '108px', margin: 'auto' }} />
         </div>
-        <div style={{padding:"10px 0"}}>
+        <div style={{ padding: "10px 0" }}>
           {
             state ? <>
               <div style={{ display: 'flex', background: "#f1f1f1", width: '90%', margin: 'auto', marginTop: "15px", padding: "6px" }}><img style={{ width: "35px", height: "35px" }} src={vib} />
@@ -31,25 +69,29 @@ export default function Login() {
               :
               <>
                 <div style={{ display: 'flex', background: "#f1f1f1", width: '90%', margin: 'auto', marginTop: "15px", padding: "6px" }}><img style={{ width: "35px", height: "35px" }} src={message} />
-                  <input style={{ width: '100%', backgroundColor: '#f1f1f1', border: "none", outline: 'none', marginLeft: '15px' }} placeholder='Your Email Address*' /></div>
+                  <input style={{ width: '100%', backgroundColor: '#f1f1f1', border: "none", outline: 'none', marginLeft: '15px' }} onChange={(e) => { setCredential({ ...credential, email: e.target.value }) }} placeholder='Your Email Address*' /></div>
                 <div style={{ display: 'flex', background: "#f1f1f1", width: '90%', margin: 'auto', marginTop: "15px", padding: "6px" }}><img style={{ width: "35px", height: "35px" }} src={lock} />
-                  <input style={{ width: '100%', backgroundColor: '#f1f1f1', border: "none", outline: 'none', marginLeft: '15px' }} placeholder='Choose Password*' /></div>
+                  <input style={{ width: '100%', backgroundColor: '#f1f1f1', border: "none", outline: 'none', marginLeft: '15px' }} onChange={(e) => { setCredential({ ...credential, pass: e.target.value }) }} placeholder='Choose Password*' /></div>
               </>
           }
         </div>
         <div>
-          <p style={{fontSize:'18px',textAlign:"center",color:"grey",padding:"10px 0"}}>OR</p>
+          <p style={{ fontSize: '18px', textAlign: "center", color: "grey", padding: "10px 0" }}>OR</p>
         </div>
-        <div style={{display:'flex',justifyContent:'center',gap:"10px"}}>
-          <div style={{display:'flex',border:"1px solid grey",padding:'5px 10px',borderRadius:'4px',cursor:"pointer"}}><img style={{width:"20px"}} src={google}/><span style={{marginLeft:"10px"}}>Sign in</span></div>
-          <div style={{display:'flex',border:"1px solid grey",padding:'5px 10px',borderRadius:'4px',cursor:"pointer"}}><img style={{width:"20px"}} src={fb}/><span style={{marginLeft:"10px"}}>Facebook</span> </div>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: "10px" }}>
+          <div style={{ display: 'flex', border: "1px solid grey", padding: '5px 10px', borderRadius: '4px', cursor: "pointer" }}><img style={{ width: "20px" }} src={google} /><span style={{ marginLeft: "10px" }}>Sign in</span></div>
+          <div style={{ display: 'flex', border: "1px solid grey", padding: '5px 10px', borderRadius: '4px', cursor: "pointer" }}><img style={{ width: "20px" }} src={fb} /><span style={{ marginLeft: "10px" }}>Facebook</span> </div>
         </div>
         <div>
-          <div style={{width:'90%',border:"2px solid",margin:'auto',marginTop:'15px'}}><button style={{width:'100%',backgroundColor:'#002855',color:'white',padding:'6px'}}>Login</button></div>
+          <div style={{ width: '90%', border: "2px solid", margin: 'auto', marginTop: '15px' }}>
+            {
+              !state ? <button style={{ width: '100%', backgroundColor: '#002855', color: 'white', padding: '6px' }} onClick={submitDataForLogin}>Login</button> : <button style={{ width: '100%', backgroundColor: '#002855', color: 'white', padding: '6px' }}>Login</button>
+            }
+          </div>
         </div>
-        <div style={{display:'flex',justifyContent:"space-between",padding:'10px 20px',fontSize:'14px'}}>
-          <div style={{color:"#002855"}}>FORGOT PASSWORD</div>
-          <div style={{color:"grey"}}>NOT REGISTERED USER?<Link to='/register' style={{color:'#002855'}}> SIGN UP</Link></div>
+        <div style={{ display: 'flex', justifyContent: "space-between", padding: '10px 20px', fontSize: '14px' }}>
+          <div style={{ color: "#002855" }}>FORGOT PASSWORD</div>
+          <div style={{ color: "grey" }}>NOT REGISTERED USER?<Link to='/register' style={{ color: '#002855' }}> SIGN UP</Link></div>
         </div>
       </div>
     </div>

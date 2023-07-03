@@ -21,7 +21,16 @@ import {
   Portal
 } from '@chakra-ui/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
+import { useSelector,useDispatch } from 'react-redux'
+import { thunkUserLoginDone } from '../../Redux/Action/ThunkAction'
+import { bindActionCreators } from 'redux'
+import { useToast } from '@chakra-ui/react'
 export default function Navbar() {
+  let userdataIsLogin=useSelector((storeData)=>storeData.isLogin);
+  let f=useSelector((storeData)=>storeData);
+  const toast=useToast();
+  //console.log(f)
+  const dispatch=useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: clothisOpen, onOpen: clothonOpen, onClose: clothonClose } = useDisclosure();
   const { isOpen: footisOPen, onOpen: footonOpen, onClose: footonClose } = useDisclosure();
@@ -30,6 +39,14 @@ export default function Navbar() {
   const { isOpen: loungeisOPen, onOpen: loungeonOpen, onClose: loungeonClose } = useDisclosure();
   const { isOpen: saleisOPen, onOpen: saleonOpen, onClose: saleonClose } = useDisclosure();
   const { isOpen: kidsisOPen, onOpen: kidsonOpen, onClose: kidsonClose } = useDisclosure();
+  const LogoutUserFunc=()=>{
+    let isLoginAction=bindActionCreators(thunkUserLoginDone,dispatch);
+    localStorage.setItem("isLogin", false)
+    localStorage.removeItem("userDetails");
+    isLoginAction();
+    //alert("Logout successfully!")
+    toast({ position:"top",description: 'Logout successfully!',status: "success",isClosable:true })
+  }
   return (
     <div className={style.NavbarDiv}>
       <div className={style.NavbarUpperSection}>
@@ -50,10 +67,17 @@ export default function Navbar() {
                 <img style={{ backgroundColor: "white", width: "30px", margin: "25%" }} src={user_icon} alt="user icon" />
               </MenuButton>
               <Portal>
-                <MenuList>
+                {
+                  !userdataIsLogin ?
+                  <MenuList>
                   <Link to='/register'><MenuItem fontSize={13}>Register</MenuItem></Link>
                   <Link to='/login'><MenuItem fontSize={13}>Login</MenuItem></Link>
+                </MenuList> : 
+                <MenuList>
+                  <MenuItem fontSize={13} onClick={LogoutUserFunc}>Log-out</MenuItem>
                 </MenuList>
+                }
+                
               </Portal>
             </Menu>
 
@@ -62,7 +86,9 @@ export default function Navbar() {
             <img style={{ width: '30px', margin: "25%" }} src={wishlist_icon} alt="wishlist icon" />
           </div>
           <div>
+            <Link to='/cart'>
             <img style={{ width: '30px', margin: "25%" }} src={bags_icon} alt="bag icon" />
+            </Link> 
           </div>
 
         </div>

@@ -14,6 +14,8 @@ import Loungewear from '../All_Products_Pages/Loungewear/Loungewear'
 import Newin from '../All_Products_Pages/Newin/Newin'
 import Sales from '../All_Products_Pages/Sales/Sales'
 import ProductDescription from '../ProductDescription/ProductDescription'
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
+import Cart from '../Cart/Cart'
 //const Accessories= React.lazy(()=>import('../All_Products_Pages/Accessories/Accessories'));
 export default function Router() {
   return (
@@ -38,6 +40,7 @@ export default function Router() {
             <Route path='/new_in/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
             <Route path='/sales' element={<><Navbar/><Sales/><Footer/></>}/>
             <Route path='/sales/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
+            <Route path='/cart' element={<><Navbar/><PrivateRoute><Cart/></PrivateRoute><Footer/></>}/>
             <Route path='*' element={<><Navbar/><h2>404, Page not found</h2><Footer/></>}/>
         </Routes>
     </div>

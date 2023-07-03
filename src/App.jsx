@@ -5,6 +5,7 @@ import './App.css'
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
 import Router from './Components/Routes/Router'
+import { useSelector } from 'react-redux'
 function App() {
   return (
     <div className="App">

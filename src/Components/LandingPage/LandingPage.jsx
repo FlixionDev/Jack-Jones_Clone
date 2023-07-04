@@ -26,6 +26,7 @@ import video1 from './videos/homemobdeskranveer.mp4'
 import storeLocator from './images/storeLocator.avif'
 import Insta from './images/Insta.avif'
 export default function LandingPage() {
+    document.title="JackJones.in I Online Shopping for Latest in Shirts, T-shirts, Jeans and Jackets"
     let arr1 = [r11, r12, r13];
     let arr3 = [denimjacket, innerwear, cap, sneaker]
     let arr4 = [jeanfit1, jeanfit2, jeanfit3, jeanfit4, jeanfit5, jeanfit6];

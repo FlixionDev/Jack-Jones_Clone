@@ -18,6 +18,7 @@ import { useToast } from '@chakra-ui/react'
 export default function Login() {
   const [state, setState] = React.useState(false);
   const [credential, setCredential] = useState({});
+  document.title="Account Login"
   const toast=useToast();
   const navigate=useNavigate();
   const dispatch = useDispatch();

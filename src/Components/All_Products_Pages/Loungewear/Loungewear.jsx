@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 export default function Loungewear() {
   let productData=useSelector((storeData)=>storeData.loungewear);
   const dispatch=useDispatch();
+  document.title="Loungewear for Men: Buy Best Nightwear sets for Mens Online in India"
   useEffect(() => {
     let loungewearAction=bindActionCreators(thunkLoungewearAction,dispatch);
     loungewearAction();

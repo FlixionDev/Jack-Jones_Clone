@@ -81,3 +81,15 @@ export const thunkUserLoginDone=()=>{
         })
     }
 }
+
+
+export const deleteCartProduct=(ind)=>{
+    return (dispatch,getState)=>{
+        let cartData=getState().cart;
+        cartData.splice(ind,1);
+        dispatch({
+            type:"cart",
+            payload:[...cartData]
+        })
+    }
+}

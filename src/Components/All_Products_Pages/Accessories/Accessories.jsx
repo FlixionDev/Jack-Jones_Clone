@@ -7,6 +7,7 @@ import { accessoriesAction } from '../../../Redux/Action/Action';
 export default function Accessories() {
   let productData = useSelector((storeData)=>storeData.accessories);
   const dispatch=useDispatch();
+  document.title="Buy Accessories For Men Online In India"
   useEffect(() => {
     accessoriesAction(dispatch)
   },[])

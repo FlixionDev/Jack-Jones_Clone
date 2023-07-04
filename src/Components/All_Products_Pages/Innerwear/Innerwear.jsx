@@ -6,6 +6,7 @@ import { innerwearAction } from '../../../Redux/Action/Action';
 export default function Innerwear() {
   let productData = useSelector((storeData) => storeData.innerwear);
   const dispatch = useDispatch();
+  document.title="Mens Underwear & Innerwears: Buy Comfortable Underwear & Innerwears for Men Online"
   useEffect(() => {
     innerwearAction(dispatch)
   }, [])

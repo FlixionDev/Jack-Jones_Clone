@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useToast } from '@chakra-ui/react'
 export default function Signup() {
   const [state,setState]=useState({});
+  document.title="User Register"
   const toast=useToast();
   const navigate=useNavigate();
   const sendUserDataToServer=()=>{

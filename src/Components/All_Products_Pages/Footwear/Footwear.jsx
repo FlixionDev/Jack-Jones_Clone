@@ -6,6 +6,7 @@ import { footwearAction } from '../../../Redux/Action/Action';
 export default function Footwear() {
   let productData = useSelector((storeData) => storeData.footwear);
   const dispatch = useDispatch();
+  document.title="Buy Footwear & Shoes for Men Online in India"
   useEffect(() => {
     footwearAction(dispatch)
   }, [])

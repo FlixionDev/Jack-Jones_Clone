@@ -6,6 +6,7 @@ import { clothingAction } from '../../../Redux/Action/Action';
 export default function Clothing() {
   let productData = useSelector((storeData) => storeData.clothing);
   const dispatch = useDispatch();
+  document.title="Buy Clothing for Mens at Jack & Jones"
   useEffect(() => {
     clothingAction(dispatch)
   }, [])

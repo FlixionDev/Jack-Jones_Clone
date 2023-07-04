@@ -7,6 +7,7 @@ import { useSelector,useDispatch } from 'react-redux';
 export default function Kids() {
   const dispatch=useDispatch();
   let productData=useSelector((storeData)=>storeData.kids)
+  document.title="Jack & Jones"
   useEffect(() => {
     // fetchProduct("https://curious-hare-jewelry.cyclic.app/kids");
     let actionThunk=bindActionCreators(thunkKidsAction,dispatch)

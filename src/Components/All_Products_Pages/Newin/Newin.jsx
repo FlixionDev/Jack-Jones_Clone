@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 export default function Newin() {
   let productData=useSelector((storeData)=>storeData.newin);
   let dispatch=useDispatch();
+  document.title="Latest Mens Collection at JACK&JONES"
   useEffect(() => {
     //fetchProduct("https://curious-hare-jewelry.cyclic.app/new_in");
     let newinAction=bindActionCreators(thunkNewinAction,dispatch);

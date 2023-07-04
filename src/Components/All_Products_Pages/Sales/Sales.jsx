@@ -7,6 +7,7 @@ import { thunkSalesAction } from '../../../Redux/Action/ThunkAction';
 export default function Sales() {
   let productData = useSelector((storeData) => storeData.sales);
   const dispatch = useDispatch();
+  document.title="Mens Clothing - Upto 50% Off on Shirts, T-shirts, Jeans, Jackets, Footwear & Innerwear |  JACK&JONES "
   useEffect(() => {
     //fetchProduct("https://curious-hare-jewelry.cyclic.app/sales");
     let salesthunk = bindActionCreators(thunkSalesAction, dispatch);

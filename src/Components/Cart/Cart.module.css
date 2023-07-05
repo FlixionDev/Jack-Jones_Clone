@@ -1,0 +1,55 @@
+.root{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    margin: 1rem;
+    gap: 10px;
+}
+.bTag{
+    color: #333333;
+    font-size: 14px;
+}
+.QuantitySelectTag{
+    border: 1px solid black;
+    font-size: 14px;
+}
+.totalSubTotalDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+b+p{
+    color: blue;
+    font-size: 14px;
+}
+.h5{
+    font-size: 14px;
+    margin: 10px 0;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.couponInput{
+    border: 1px solid black;
+    width: 70%;
+    padding: 5px;
+}
+.applyCouponBtn{
+    background-color: #002855;
+    color: white;
+    width: 30%;
+    padding: 6px;
+    border-radius: 0 7px 7px 0;
+    
+}
+.buyNowBtn{
+    width: 100%;
+    background-color: #002855;
+    color: white;
+    margin: 14px 0px;
+    padding: 7px;
+    font-size: 14px;
+    border-radius: 5px;
+
+}

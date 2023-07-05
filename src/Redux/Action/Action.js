@@ -82,4 +82,9 @@ export const cartAction = (data, dispatch) => {
     }
 }
 
-
+export const finalAmountAction=(data,dispatch)=>{
+    dispatch({
+        type:"finalAmount",
+        payload:data
+    })
+}

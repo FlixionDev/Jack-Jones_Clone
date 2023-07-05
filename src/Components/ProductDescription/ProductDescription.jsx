@@ -25,6 +25,7 @@ export default function ProductDescription() {
   let productListData = useSelector((storeData) => storeData);
   // console.log(productListData)
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (product[1] == 'accessories') {
       if (productListData.accessories.length == 0) {
         accessoriesAction(dispatch);

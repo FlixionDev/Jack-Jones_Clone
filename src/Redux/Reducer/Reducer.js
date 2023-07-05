@@ -10,6 +10,7 @@ let initialData={
     cart:[],
     isLogin:localStorage.getItem("isLogin") || false,
     userDetails:JSON.parse(localStorage.getItem("userDetails")) || [],
+    finalAmount:0,
 }
 export const Reducer=(storeData=initialData,action)=>{
     switch(action.type){
@@ -77,6 +78,12 @@ export const Reducer=(storeData=initialData,action)=>{
             return{
                 ...storeData,
                 cart:action.payload
+            }
+        }
+        case 'finalAmount':{
+            return {
+                ...storeData,
+                finalAmount:action.payload
             }
         }
     }

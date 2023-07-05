@@ -6,6 +6,7 @@ import style from './Cart.module.css'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { finalAmountAction } from '../../Redux/Action/Action'
 import { useToast } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 export default function Cart() {
   let cartItem = useSelector((storeData) => storeData.cart)
   let ref1 = useRef(null);
@@ -14,6 +15,7 @@ export default function Cart() {
   const [state, setState] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0);
   const [couponCheck,setCouponCheck]=useState(false);
+  const navigate=useNavigate();
   useEffect(() => {
     setTotalPrice(cartItem.reduce((total, el) => {
       if (el.price) {
@@ -44,8 +46,14 @@ export default function Cart() {
       setCouponCheck(false)
     }
   }
+  const handleContinueShopping=()=>{
+    navigate("/");
+  }
   return (
-    <div className={style.root}>
+    <>
+    {
+      cartItem.length > 0 ?
+      <div className={style.root}>
       <div style={{ background: '#faf9f8' }}>
         {
           cartItem.length > 0 ?
@@ -122,6 +130,16 @@ export default function Cart() {
           <button className={style.buyNowBtn}>BUY NOW</button>
         </div>
       </div>
+    </div> : 
+    <div style={{ background: '#faf9f8',padding:"20px" }}>
+      <div style={{width:"80px",height:"80px",margin:"auto",border:"3px solid #9e9e9e",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"70px"}}><i style={{fontSize:"40px",color:"#9e9e9e"}} class="fa fa-times" aria-hidden="true"></i></div>
+      <h1 style={{textAlign:"center",color:"#9e9e9e"}}>Your shopping cart is empty!</h1>
+      <div style={{width:"200px",margin:"auto"}}>
+
+      <button className={style.buyNowBtn} onClick={handleContinueShopping}>Continue</button>
+      </div>
     </div>
+    }
+    </>
   )
 }

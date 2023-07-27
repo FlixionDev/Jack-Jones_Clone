@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 function App() {
   return (
     <div className="App">
-     <Router/>
+     {/* <Router/> */}
     </div>
   )
 }

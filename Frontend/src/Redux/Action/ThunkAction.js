@@ -2,7 +2,7 @@ export const thunkKidsAction=()=>{
     return (dispatch,getState)=>{
         let kidsData=getState().kids;
         const fetchKidsData=()=>{
-            fetch(`https://curious-hare-jewelry.cyclic.app/kids`).then((res) => { return res.json() }).then((res) => { dispatch({
+            fetch(`http://localhost:4000/products/kids`).then((res) => { return res.json() }).then((res) => { dispatch({
                 type:"kids",
                 payload:res
             }) })
@@ -18,7 +18,7 @@ export const thunkLoungewearAction=()=>{
     return (dispatch,getState)=>{
         let loungewearData=getState().loungewear;
         const fetchloungewearData=()=>{
-            fetch("https://curious-hare-jewelry.cyclic.app/loungewears").then((res)=>res.json()).then((res)=>{
+            fetch("http://localhost:4000/products/loungewears").then((res)=>res.json()).then((res)=>{
                 dispatch({
                     type:"loungewear",
                     payload:res
@@ -36,7 +36,7 @@ export const thunkNewinAction=()=>{
     return (dispatch,getState)=>{
         let newinData=getState().newin;
         const fetchnewinData=()=>{
-            fetch("https://curious-hare-jewelry.cyclic.app/new_in").then((res)=>res.json()).then((res)=>{
+            fetch("http://localhost:4000/products/new_ins").then((res)=>res.json()).then((res)=>{
                 dispatch({
                     type:"newin",
                     payload:res
@@ -53,7 +53,7 @@ export const thunkSalesAction=()=>{
     return (dispatch,getState)=>{
         let salesData=getState().sales;
         const fetchSalesData=()=>{
-            fetch("https://curious-hare-jewelry.cyclic.app/sales").then((res)=>res.json()).then((res)=>{
+            fetch("http://localhost:4000/products/sales").then((res)=>res.json()).then((res)=>{
                 dispatch({
                     type:"sales",
                     payload:res
@@ -69,8 +69,8 @@ export const thunkSalesAction=()=>{
 
 export const thunkUserLoginDone=()=>{
     return (dispatch,getState)=>{
-        let isLogin=JSON.parse(localStorage.getItem("isLogin")) || false;
-        let userDetails=JSON.parse(localStorage.getItem("userDetails")) || [];
+        let isLogin=JSON.parse(sessionStorage.getItem("isLogin")) || false;
+        let userDetails=JSON.parse(sessionStorage.getItem("userDetails")) || [];
         dispatch({
             type:"isLogin",
             payload:isLogin

@@ -8,7 +8,7 @@ let initialData={
     newin:[],
     sales:[],
     cart:[],
-    isLogin:localStorage.getItem("isLogin") || false,
+    isLogin:sessionStorage.getItem("isLogin") || false,
     userDetails:JSON.parse(localStorage.getItem("userDetails")) || [],
     finalAmount:0,
 }

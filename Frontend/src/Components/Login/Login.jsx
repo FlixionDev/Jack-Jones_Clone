@@ -23,29 +23,26 @@ export default function Login() {
   const navigate=useNavigate();
   const dispatch = useDispatch();
   let isLoginAction = bindActionCreators(thunkUserLoginDone, dispatch);
-  const checkActionCreatedOnServer=()=>{
-    fetch(`https://curious-hare-jewelry.cyclic.app/users?email=${credential.email}`).then((res) => res.json()).then((res) => {
-      if (res.length > 0) {
-        // alert("Please enter correct password");
+  const submitDataForLogin = () => {
+    fetch(`http://localhost:4000/users/login`,{
+      method:"POST",
+      body:JSON.stringify(credential),
+      headers:{
+        "Content-Type":"application/json"
+      }
+    }).then((res) => res.json()).then((res) => {
+      if(res.message=="Wrong Password"){
         toast({ position:"top",description: 'Please enter correct password',status: "warning",isClosable:true })
-      }else{
-        //alert("No account find, Please create first")
+      }else if(res.message=="No account found with this email. Please Register"){
         toast({ position:"top",description: 'No account find, Please create first',status: "error",isClosable:true })
         navigate("/register");
-      }
-    })
-  }
-  const submitDataForLogin = () => {
-    fetch(`https://curious-hare-jewelry.cyclic.app/users?email=${credential.email}&pass=${credential.pass}`).then((res) => res.json()).then((res) => {
-      if (res.length > 0) {
-        localStorage.setItem("isLogin", true)
-        localStorage.setItem("userDetails", JSON.stringify({ name: res[0].name, email: res[0].email, mobile: res[0].mobile }))
+      }else if(res.message=="Login successfull"){
+        sessionStorage.setItem("isLogin",true);
+        sessionStorage.setItem("userDetails",JSON.stringify({name:res.name,email:res.email}));
+        sessionStorage.setItem("token",res.token)
         isLoginAction()
-        //alert(`Hey ${res[0].name}, Login successfull!`);
-        toast({ position:"top",description: `Hey ${res[0].name}, Login successfull!`,status: "success",isClosable:true })
+        toast({ position:"top",description: `Hey ${res.name}, Login successfull!`,status: "success",isClosable:true })
         navigate("/")
-      }else{
-        checkActionCreatedOnServer();
       }
     })
 

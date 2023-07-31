@@ -23,7 +23,7 @@ export default function ProductDescription() {
   const { pathname } = useLocation();
   const product = pathname.split("/")
   let productListData = useSelector((storeData) => storeData);
-  // console.log(productListData)
+  //  console.log(product)
   useEffect(() => {
     window.scrollTo(0, 0);
     if (product[1] == 'accessories') {

@@ -41,8 +41,8 @@ export default function Navbar() {
   const { isOpen: kidsisOPen, onOpen: kidsonOpen, onClose: kidsonClose } = useDisclosure();
   const LogoutUserFunc=()=>{
     let isLoginAction=bindActionCreators(thunkUserLoginDone,dispatch);
-    localStorage.setItem("isLogin", false)
-    localStorage.removeItem("userDetails");
+    sessionStorage.setItem("isLogin", false)
+    sessionStorage.removeItem("userDetails");
     isLoginAction();
     //alert("Logout successfully!")
     toast({ position:"top",description: 'Logout successfully!',status: "success",isClosable:true })

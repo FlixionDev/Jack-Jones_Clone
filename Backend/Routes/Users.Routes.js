@@ -8,7 +8,7 @@ userRouter.post("/register", async (req, res) => {
     const { name, email, mob_no, pass, dob } = req.body
     try {
         let findUser = await UserModel.find({ email });
-        if (findUser) {
+        if (findUser.length > 0) {
             res.send({ "message": "Your email is already registered. Please login!" })
         } else {
             bcrypt.hash(pass, 8, async (err, hashPassword) => {

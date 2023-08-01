@@ -2,7 +2,7 @@ import store from "../Store/Store"
 export const accessoriesAction = (dispatch) => {
     let accessoriesData = store.getState().accessories;
     const fetchAccessoriesData = () => {
-        fetch(`http://localhost:4000/products/accessories`).then((res) => { return res.json() }).then((data) => {
+        fetch(`https://glamorous-ring-newt.cyclic.app/products/accessories`).then((res) => { return res.json() }).then((data) => {
             dispatch({
                 type: "accessories",
                 payload: data
@@ -17,7 +17,7 @@ export const accessoriesAction = (dispatch) => {
 export const clothingAction = (dispatch) => {
     let clothingData = store.getState().clothing;
     const fetchClothingData = () => {
-        fetch(`http://localhost:4000/products/clothings`).then((res) => { return res.json() }).then((data) => {
+        fetch(`https://glamorous-ring-newt.cyclic.app/products/clothings`).then((res) => { return res.json() }).then((data) => {
             dispatch({
                 type: "clothing",
                 payload: data
@@ -32,7 +32,7 @@ export const clothingAction = (dispatch) => {
 export const footwearAction = (dispatch) => {
     let footwearData = store.getState().footwear;
     const fetchFootwearData = () => {
-        fetch(`http://localhost:4000/products/footwears`).then((res) => { return res.json() }).then((data) => {
+        fetch(`https://glamorous-ring-newt.cyclic.app/products/footwears`).then((res) => { return res.json() }).then((data) => {
             dispatch({
                 type: "footwear",
                 payload: data
@@ -48,7 +48,7 @@ export const footwearAction = (dispatch) => {
 export const innerwearAction = (dispatch) => {
     let innerwearData = store.getState().innerwear;
     const fetchInnerwearData = () => {
-        fetch(`http://localhost:4000/products/innerwears`).then((res) => { return res.json() }).then((data) => {
+        fetch(`https://glamorous-ring-newt.cyclic.app/products/innerwears`).then((res) => { return res.json() }).then((data) => {
             dispatch({
                 type: "innerwear",
                 payload: data

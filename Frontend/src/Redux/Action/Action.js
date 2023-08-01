@@ -74,11 +74,13 @@ export const cartAction = (data, dispatch) => {
             type: "cart",
             payload: [...cartData]
         })
+        sessionStorage.setItem("cart",JSON.stringify([...cartData]))
     } else {
         dispatch({
             type: "cart",
             payload: [...cartData, data]
         })
+        sessionStorage.setItem("cart",JSON.stringify([...cartData,data]))
     }
 }
 

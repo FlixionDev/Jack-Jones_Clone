@@ -91,5 +91,6 @@ export const deleteCartProduct=(ind)=>{
             type:"cart",
             payload:[...cartData]
         })
+        sessionStorage.setItem("cart",JSON.stringify([...cartData]))
     }
 }

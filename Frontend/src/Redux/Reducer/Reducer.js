@@ -7,7 +7,7 @@ let initialData={
     loungewear:[],
     newin:[],
     sales:[],
-    cart:[],
+    cart:JSON.parse(sessionStorage.getItem("cart")) || [],
     isLogin:sessionStorage.getItem("isLogin") || false,
     userDetails:JSON.parse(localStorage.getItem("userDetails")) || [],
     finalAmount:0,

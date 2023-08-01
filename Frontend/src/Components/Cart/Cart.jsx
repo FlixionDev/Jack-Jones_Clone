@@ -88,6 +88,7 @@ export default function Cart() {
                         <select className={style.QuantitySelectTag} onChange={(e) => {
                           el.quantity = e.target.value;
                           setState(!state)
+                          sessionStorage.setItem("cart",JSON.stringify(cartItem))
                         }} defaultValue={el.quantity}>
                           <option value="1">1</option>
                           <option value="2">2</option>

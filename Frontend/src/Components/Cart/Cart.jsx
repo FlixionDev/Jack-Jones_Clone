@@ -49,6 +49,9 @@ export default function Cart() {
   const handleContinueShopping=()=>{
     navigate("/");
   }
+  const gotoCheckout=()=>{
+    navigate("/checkout")
+  }
   return (
     <>
     {
@@ -128,7 +131,7 @@ export default function Cart() {
           </div>
         </div>
         <div style={{ margin: "0 8px" }}>
-          <button className={style.buyNowBtn}>BUY NOW</button>
+          <button className={style.buyNowBtn} onClick={gotoCheckout}>BUY NOW</button>
         </div>
       </div>
     </div> : 

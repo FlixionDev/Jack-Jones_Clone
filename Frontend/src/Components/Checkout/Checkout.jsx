@@ -5,8 +5,10 @@ import { deleteCartProduct } from '../../Redux/Action/ThunkAction'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import style from '../Checkout/Checkout.module.css'
+import { useNavigate } from 'react-router-dom'
 export default function Checkout() {
   const cartItem = useSelector((storeData) => storeData.cart)
+  const navigate=useNavigate();
   const [addressCheck, setAddressCheck] = useState("existAdd");
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
@@ -23,16 +25,20 @@ export default function Checkout() {
   })
   const [listaddress,setListaddress]=useState("");
   useEffect(() => {
+    let discountAmt=0;
+    if(sessionStorage.getItem("coupon")=="NEW100"){
+      discountAmt=-100;
+    }
     setTotalPrice(cartItem.reduce((total, el) => {
       if (el.price) {
         return (el.price * el.quantity) + total
       } else {
         return (999 * el.quantity) + total
       }
-    }, 0))
+    }, discountAmt))
   }, [state])
   useEffect(()=>{
-    fetch("http://localhost:4000/address",{
+    fetch("https://glamorous-ring-newt.cyclic.app/address",{
       headers:{
         "Authorization":sessionStorage.getItem("token")
       }
@@ -52,29 +58,32 @@ export default function Checkout() {
   const submitAddress=()=>{
     if(address.fname!="" && address.lname!="" && address.addLine1!="" && address.addLine2!="" && address.postcode!="" && address.city!="" && address.state!="" && address.country!=""){
       sessionStorage.setItem("selectedAddress",JSON.stringify(address))
-      fetch(`http://localhost:4000/address/`,{
+      fetch(`https://glamorous-ring-newt.cyclic.app/address/`,{
         method:"POST",
         body:JSON.stringify(address),
         headers:{
           "Authorization":sessionStorage.getItem("token"),
           "Content-Type":"application/json"
         }
-      }).then(res=>res.json()).then((res)=>{console.log(res)}).catch((err)=>console.log(err))
+      }).then(res=>res.json()).then((res)=>{
+        console.log(res)
+        navigate("/payment")
+      }).catch((err)=>console.log(err))
     }
   }
   const proceedToPayment=()=>{
-    console.log("hii")
+    navigate("/payment")
   }
   return (
     <div>
       <div style={{ display: "grid", gridTemplateColumns: "60% 40%" }}>
-        <div style={{ border: "2px solid black" }}>
+        <div style={{ padding:"20px" }}>
           <h1 style={{ textAlign: "center", color: "#444", fontSize: "30px" }}>Address</h1>
           <p>Delivery Details</p>
           <div><input type='radio' name='address' id='existAddress' onChange={() => { setAddressCheck("existAdd") }} defaultChecked value='existAddress' /> I want to use an existing address</div>
           {
             addressCheck === "existAdd" ? <div>
-              <select onChange={(e)=>{sessionStorage.setItem("selectedAddress",JSON.stringify(e.target.value))}} style={{width:"95%", border: "1px solid grey",height: "40px",outline: "none",padding: "5px"}}>
+              <select onChange={(e)=>{sessionStorage.setItem("selectedAddress",JSON.stringify(e.target.value))}} style={{width:"100%", border: "1px solid grey",height: "40px",outline: "none",padding: "5px"}}>
                 {/* {
                   listaddress.length > 0 ? <option value="">Please select address</option> : ""
                 } */}
@@ -167,10 +176,10 @@ export default function Checkout() {
             </div> : null
           }
           <div style={{}}>
-            <button style={{ backgroundColor: "#002855", color: "white",padding:"7px",margin:"7px 0" }} onClick={addressCheck=="existAdd" ? proceedToPayment : submitAddress}>Continue</button>
+            <button style={{ backgroundColor: "#002855", color: "white",padding:"7px",margin:"15px 0" }} onClick={addressCheck=="existAdd" ? proceedToPayment : submitAddress}>Continue</button>
           </div>
         </div>
-        <div style={{ border: "2px solid black" }}>
+        <div style={{  }}>
           <div style={{ background: '#faf9f8', height: '100%', maxHeight: "600px", overflow: "scroll" }}>
             {
               cartItem.length > 0 ?

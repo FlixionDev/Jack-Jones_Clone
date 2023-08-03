@@ -17,6 +17,7 @@ import ProductDescription from '../ProductDescription/ProductDescription'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import Cart from '../Cart/Cart'
 import Checkout from '../Checkout/Checkout'
+import Payment from '../Payment/Payment'
 //const Accessories= React.lazy(()=>import('../All_Products_Pages/Accessories/Accessories'));
 export default function Router() {
   return (
@@ -43,6 +44,7 @@ export default function Router() {
             <Route path='/sales/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
             <Route path='/cart' element={<><Navbar/><PrivateRoute><Cart/></PrivateRoute><Footer/></>}/>
             <Route path='/checkout' element={<><Navbar/><PrivateRoute><Checkout/></PrivateRoute><Footer/></>}/>
+            <Route path='/payment' element={<><Navbar/><PrivateRoute><Payment/></PrivateRoute><Footer/></>}/>
             <Route path='*' element={<><Navbar/><h2>404, Page not found</h2><Footer/></>}/>
         </Routes>
     </div>

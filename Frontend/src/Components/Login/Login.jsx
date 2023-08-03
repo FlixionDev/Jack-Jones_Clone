@@ -69,7 +69,7 @@ export default function Login() {
                 <div style={{ display: 'flex', background: "#f1f1f1", width: '90%', margin: 'auto', marginTop: "15px", padding: "6px" }}><img style={{ width: "35px", height: "35px" }} src={message} />
                   <input style={{ width: '100%', backgroundColor: '#f1f1f1', border: "none", outline: 'none', marginLeft: '15px' }} onChange={(e) => { setCredential({ ...credential, email: e.target.value }) }} placeholder='Your Email Address*' /></div>
                 <div style={{ display: 'flex', background: "#f1f1f1", width: '90%', margin: 'auto', marginTop: "15px", padding: "6px" }}><img style={{ width: "35px", height: "35px" }} src={lock} />
-                  <input style={{ width: '100%', backgroundColor: '#f1f1f1', border: "none", outline: 'none', marginLeft: '15px' }} onChange={(e) => { setCredential({ ...credential, pass: e.target.value }) }} placeholder='Choose Password*' /></div>
+                  <input type='password' style={{ width: '100%', backgroundColor: '#f1f1f1', border: "none", outline: 'none', marginLeft: '15px' }} onChange={(e) => { setCredential({ ...credential, pass: e.target.value }) }} placeholder='Choose Password*' /></div>
               </>
           }
         </div>

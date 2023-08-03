@@ -17,33 +17,42 @@ export default function Cart() {
   const [couponCheck,setCouponCheck]=useState(false);
   const navigate=useNavigate();
   useEffect(() => {
+    let discountAmt=0;
+    if(sessionStorage.getItem("coupon")=="NEW100"){
+      discountAmt=-100;
+      setCouponCheck(true)
+    }
     setTotalPrice(cartItem.reduce((total, el) => {
       if (el.price) {
         return (el.price * el.quantity) + total
       } else {
         return (999 * el.quantity) + total
       }
-    }, 0))
-  }, [state])
+    }, discountAmt))
+  }, [state,totalPrice])
   let cartProductDelete = bindActionCreators(deleteCartProduct, dispatch);
   const removeProduct = (ind) => {
     cartProductDelete(ind);
     setState(!state)
   }
   const applyCouponfunc = () => {
+    sessionStorage.removeItem("coupon");
     if(cartItem.length > 0){
       if (ref1.current.value == "NEW100") {
         setTotalPrice(totalPrice-100);
         toast({ position: "top", description: 'You get Rs100 OFF in this purchase', status: "success", isClosable: true });
         setCouponCheck(true);
+        sessionStorage.setItem("coupon","NEW100");
         finalAmountAction(totalPrice-100,dispatch)
       } else {
         toast({ position: "top", description: 'Please enter valid coupon code', status: "error", isClosable: true })
         setCouponCheck(false)
+        sessionStorage.removeItem("coupon")
       }
     }else{
       toast({ position: "top", description: 'Please add some product in your cart', status: "error", isClosable: true })
       setCouponCheck(false)
+      sessionStorage.removeItem("coupon")
     }
   }
   const handleContinueShopping=()=>{
@@ -126,7 +135,10 @@ export default function Cart() {
         <div>
           <p style={{ color: "#999", fontSize: "14px", fontWeight: '400', paddingBottom: "7px", marginLeft: '10px' }}>* COUPON CODE</p>
           <div style={{ margin: "0 8px" }}>
-            <input className={style.couponInput} ref={ref1} placeholder='Enter your coupon here' />
+            <input className={style.couponInput} ref={ref1} onChange={()=>{
+              sessionStorage.removeItem("coupon")
+              setCouponCheck(false)
+              }} placeholder='Enter your coupon here' />
             <button className={style.applyCouponBtn} disabled={couponCheck ? true : false} style={couponCheck ? {backgroundColor:"grey"}: null} onClick={applyCouponfunc}>{couponCheck ? "Coupon applied" : "APPLY COUPON"}</button>
           </div>
         </div>

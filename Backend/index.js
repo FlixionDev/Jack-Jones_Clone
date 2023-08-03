@@ -5,6 +5,8 @@ const {productRouter}=require("./Routes/Product.Routes")
 const {userRouter}=require("./Routes/Users.Routes")
 const cors=require("cors")
 require("dotenv").config();
+const {addressRouter}=require("./Routes/Address.Routes")
+const {loginCheck}=require("./middleware/loginCheck.middleware")
 app.use(express.json())
 app.use(cors())
 app.get("/",(req,res)=>{
@@ -12,7 +14,8 @@ app.get("/",(req,res)=>{
 })
 app.use("/products",productRouter)
 app.use("/users",userRouter)
-
+app.use(loginCheck)
+app.use("/address",addressRouter)
 app.listen(process.env.port,async()=>{
     try{
         await connection;

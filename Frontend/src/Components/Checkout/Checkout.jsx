@@ -4,14 +4,24 @@ import { DeleteIcon } from '@chakra-ui/icons'
 import { deleteCartProduct } from '../../Redux/Action/ThunkAction'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
-
+import style from '../Checkout/Checkout.module.css'
 export default function Checkout() {
   const cartItem = useSelector((storeData) => storeData.cart)
   const [addressCheck, setAddressCheck] = useState("existAdd");
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
   const [state, setState] = useState(false)
+  const [address,setAddress]=useState({
+    fname:"",
+    lname:"",
+    addLine1:"",
+    addLine2:"",
+    postcode:"",
+    city:"",
+    state:"",
+    country:"india"
+  })
+  const [listaddress,setListaddress]=useState("");
   useEffect(() => {
     setTotalPrice(cartItem.reduce((total, el) => {
       if (el.price) {
@@ -21,10 +31,39 @@ export default function Checkout() {
       }
     }, 0))
   }, [state])
+  useEffect(()=>{
+    fetch("http://localhost:4000/address",{
+      headers:{
+        "Authorization":sessionStorage.getItem("token")
+      }
+    }).then(res=>res.json()).then((res)=>{
+      setListaddress(res)
+      if(res.length > 0){
+      sessionStorage.setItem("selectedAddress",JSON.stringify(res[0]))
+      }
+    }).catch(err=>console.log(err))
+  },[])
+  // console.log(listaddress)
   let cartProductDelete = bindActionCreators(deleteCartProduct, dispatch);
   const removeProduct = (ind) => {
     cartProductDelete(ind);
     setState(!state)
+  }
+  const submitAddress=()=>{
+    if(address.fname!="" && address.lname!="" && address.addLine1!="" && address.addLine2!="" && address.postcode!="" && address.city!="" && address.state!="" && address.country!=""){
+      sessionStorage.setItem("selectedAddress",JSON.stringify(address))
+      fetch(`http://localhost:4000/address/`,{
+        method:"POST",
+        body:JSON.stringify(address),
+        headers:{
+          "Authorization":sessionStorage.getItem("token"),
+          "Content-Type":"application/json"
+        }
+      }).then(res=>res.json()).then((res)=>{console.log(res)}).catch((err)=>console.log(err))
+    }
+  }
+  const proceedToPayment=()=>{
+    console.log("hii")
   }
   return (
     <div>
@@ -35,7 +74,18 @@ export default function Checkout() {
           <div><input type='radio' name='address' id='existAddress' onChange={() => { setAddressCheck("existAdd") }} defaultChecked value='existAddress' /> I want to use an existing address</div>
           {
             addressCheck === "existAdd" ? <div>
-              hiii
+              <select onChange={(e)=>{sessionStorage.setItem("selectedAddress",JSON.stringify(e.target.value))}} style={{width:"95%", border: "1px solid grey",height: "40px",outline: "none",padding: "5px"}}>
+                {/* {
+                  listaddress.length > 0 ? <option value="">Please select address</option> : ""
+                } */}
+                {
+                  listaddress.length > 0 ? 
+                    listaddress.map((el,ind)=>{
+                      return <option key={ind+1} value={el.addLine1 +", "+ el.addLine2 +", "+ el.city +", "+ el.postcode +", "+ el.state +", "+ el.country}>{el.addLine1 +", "+ el.addLine2 +", "+ el.city +", "+ el.postcode +", "+ el.state +", "+ el.country}</option>
+                    })
+                   : <option value=''>No saved address found</option>
+                }
+              </select>
             </div> : null
           }
           <div><input type='radio' name='address' id='newAddress' onChange={() => { setAddressCheck("newAdd") }} value='newAddress' /> I want to use a new address</div>
@@ -43,81 +93,81 @@ export default function Checkout() {
             addressCheck === "newAdd" ? <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)" }}>
               <div>
                 <label>* first name</label><br />
-                <input style={{ border: "1px solid grey", width: "80%", height: "40px", outline: "none", padding: "5px" }} type="text" />
+                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,fname:e.target.value})}} type="text" />
               </div>
               <div>
                 <label>* last name</label><br />
-                <input style={{ border: "1px solid grey", width: "80%", height: "40px", outline: "none", padding: "5px" }} type="text" />
+                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,lname:e.target.value})}}  type="text" />
               </div>
               <div>
                 <label>* Address line 1</label><br />
-                <input style={{ border: "1px solid grey", width: "80%", height: "40px", outline: "none", padding: "5px" }} type="text" />
+                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,addLine1:e.target.value})}} type="text" />
               </div>
               <div>
                 <label>* Address line 2</label><br />
-                <input style={{ border: "1px solid grey", width: "80%", height: "40px", outline: "none", padding: "5px" }} type="text" />
+                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,addLine2:e.target.value})}} type="text" />
               </div>
               <div>
                 <label>* Postal code</label><br />
-                <input style={{ border: "1px solid grey", width: "80%", height: "40px", outline: "none", padding: "5px" }} type="number" />
+                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,postcode:e.target.value})}} type="text" />
               </div>
               <div>
                 <label>* City</label><br />
-                <input style={{ border: "1px solid grey", width: "80%", height: "40px", outline: "none", padding: "5px" }} type="text" />
+                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,city:e.target.value})}} type="text" />
               </div>
               <div>
                 <label>* State</label><br />
-                <select id="country-state" style={{ border: "1px solid grey", width: "80%", height: "40px", outline: "none", padding: "5px" }} name="country-state">
+                <select id="country-state" className={style.addressTag} onChange={(e)=>{setAddress({...address,state:e.target.value})}} name="country-state">
                   <option value="">Select state</option>
-                  <option value="AN">Andaman and Nicobar Islands</option>
-                  <option value="AP">Andhra Pradesh</option>
-                  <option value="AR">Arunachal Pradesh</option>
-                  <option value="AS">Assam</option>
-                  <option value="BR">Bihar</option>
-                  <option value="CH">Chandigarh</option>
-                  <option value="CT">Chhattisgarh</option>
-                  <option value="DN">Dadra and Nagar Haveli</option>
-                  <option value="DD">Daman and Diu</option>
-                  <option value="DL">Delhi</option>
-                  <option value="GA">Goa</option>
-                  <option value="GJ">Gujarat</option>
-                  <option value="HR">Haryana</option>
-                  <option value="HP">Himachal Pradesh</option>
-                  <option value="JK">Jammu and Kashmir</option>
-                  <option value="JH">Jharkhand</option>
-                  <option value="KA">Karnataka</option>
-                  <option value="KL">Kerala</option>
-                  <option value="LA">Ladakh</option>
-                  <option value="LD">Lakshadweep</option>
-                  <option value="MP">Madhya Pradesh</option>
-                  <option value="MH">Maharashtra</option>
-                  <option value="MN">Manipur</option>
-                  <option value="ML">Meghalaya</option>
-                  <option value="MZ">Mizoram</option>
-                  <option value="NL">Nagaland</option>
-                  <option value="OR">Odisha</option>
-                  <option value="PY">Puducherry</option>
-                  <option value="PB">Punjab</option>
-                  <option value="RJ">Rajasthan</option>
-                  <option value="SK">Sikkim</option>
-                  <option value="TN">Tamil Nadu</option>
-                  <option value="TG">Telangana</option>
-                  <option value="TR">Tripura</option>
-                  <option value="UP">Uttar Pradesh</option>
-                  <option value="UT">Uttarakhand</option>
-                  <option value="WB">West Bengal</option>
+                  <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                  <option value="Assam">Assam</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Chhattisgarh">Chhattisgarh</option>
+                  <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                  <option value="Daman and Diu">Daman and Diu</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Gujarat">Gujarat</option>
+                  <option value="Haryana">Haryana</option>
+                  <option value="Himachal Pradesh">Himachal Pradesh</option>
+                  <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                  <option value="Jharkhand">Jharkhand</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Ladakh">Ladakh</option>
+                  <option value="Lakshadweep">Lakshadweep</option>
+                  <option value="Madhya Pradesh">Madhya Pradesh</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Manipur">Manipur</option>
+                  <option value="Meghalaya">Meghalaya</option>
+                  <option value="Mizoram">Mizoram</option>
+                  <option value="Nagaland">Nagaland</option>
+                  <option value="Odisha">Odisha</option>
+                  <option value="Puducherry">Puducherry</option>
+                  <option value="Punjab">Punjab</option>
+                  <option value="Rajasthan">Rajasthan</option>
+                  <option value="Sikkim">Sikkim</option>
+                  <option value="Tamil Nadu">Tamil Nadu</option>
+                  <option value="Telangana">Telangana</option>
+                  <option value="Tripura">Tripura</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="Uttarakhand">Uttarakhand</option>
+                  <option value="West Bengal">West Bengal</option>
                 </select>
               </div>
               <div>
                 <label>* Country</label><br />
-                <select style={{ border: "1px solid grey", width: "80%", height: "40px", outline: "none", padding: "5px" }}>
-                  <option>India</option>
+                <select className={style.addressTag} onChange={(e)=>{setAddress({...address,country:e.target.value})}}>
+                  <option value="india">India</option>
                 </select>
               </div>
             </div> : null
           }
           <div style={{}}>
-            <button style={{ backgroundColor: "#002855", color: "white" }}>Continue</button>
+            <button style={{ backgroundColor: "#002855", color: "white",padding:"7px",margin:"7px 0" }} onClick={addressCheck=="existAdd" ? proceedToPayment : submitAddress}>Continue</button>
           </div>
         </div>
         <div style={{ border: "2px solid black" }}>

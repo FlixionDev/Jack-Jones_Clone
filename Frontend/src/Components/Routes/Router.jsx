@@ -44,7 +44,7 @@ export default function Router() {
             <Route path='/sales/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
             <Route path='/cart' element={<><Navbar/><PrivateRoute><Cart/></PrivateRoute><Footer/></>}/>
             <Route path='/checkout' element={<><Navbar/><PrivateRoute><Checkout/></PrivateRoute><Footer/></>}/>
-            <Route path='/payment' element={<><Navbar/><PrivateRoute><Payment/></PrivateRoute><Footer/></>}/>
+            <Route path='/payment' element={<><PrivateRoute><Payment/></PrivateRoute></>}/>
             <Route path='*' element={<><Navbar/><h2>404, Page not found</h2><Footer/></>}/>
         </Routes>
     </div>

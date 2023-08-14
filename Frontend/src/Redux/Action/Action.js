@@ -63,25 +63,33 @@ export const innerwearAction = (dispatch) => {
 export const cartAction = (data, dispatch) => {
     let cartData = store.getState().cart;
     let bool = false;
-    cartData.map((el, ind) => {
-        if (el._id == data._id && el.size==data.size) {
-            el.quantity = el.quantity + 1;
-            bool = true;
+    if(data.length === 0){
+        dispatch({
+            type:"cart",
+            payload:data
+        })
+    }else{
+        cartData.map((el, ind) => {
+            if (el._id == data._id && el.size==data.size) {
+                el.quantity = el.quantity + 1;
+                bool = true;
+            }
+        })
+        if (bool) {
+            dispatch({
+                type: "cart",
+                payload: [...cartData]
+            })
+            sessionStorage.setItem("cart",JSON.stringify([...cartData]))
+        } else {
+            dispatch({
+                type: "cart",
+                payload: [...cartData, data]
+            })
+            sessionStorage.setItem("cart",JSON.stringify([...cartData,data]))
         }
-    })
-    if (bool) {
-        dispatch({
-            type: "cart",
-            payload: [...cartData]
-        })
-        sessionStorage.setItem("cart",JSON.stringify([...cartData]))
-    } else {
-        dispatch({
-            type: "cart",
-            payload: [...cartData, data]
-        })
-        sessionStorage.setItem("cart",JSON.stringify([...cartData,data]))
     }
+    
 }
 
 export const finalAmountAction=(data,dispatch)=>{

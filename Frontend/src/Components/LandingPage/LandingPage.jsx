@@ -28,8 +28,8 @@ import Insta from './images/Insta.avif'
 import { useSelector } from 'react-redux'
 export default function LandingPage() {
     document.title="JackJones.in I Online Shopping for Latest in Shirts, T-shirts, Jeans and Jackets"
-    // let reduxdata=useSelector(storeData=>storeData);
-    // console.log(reduxdata)
+    let reduxdata=useSelector(storeData=>storeData);
+    console.log(reduxdata)
     let arr1 = [r11, r12, r13];
     let arr3 = [denimjacket, innerwear, cap, sneaker]
     let arr4 = [jeanfit1, jeanfit2, jeanfit3, jeanfit4, jeanfit5, jeanfit6];

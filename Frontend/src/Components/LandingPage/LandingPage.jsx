@@ -25,16 +25,17 @@ import ReactPlayer from 'react-player'
 import video1 from './videos/homemobdeskranveer.mp4'
 import storeLocator from './images/storeLocator.avif'
 import Insta from './images/Insta.avif'
+import style from './LandingPage.module.css'
 import { useSelector } from 'react-redux'
 export default function LandingPage() {
-    document.title="JackJones.in I Online Shopping for Latest in Shirts, T-shirts, Jeans and Jackets"
-    let reduxdata=useSelector(storeData=>storeData);
-    console.log(reduxdata)
+    document.title = "JackJones.in I Online Shopping for Latest in Shirts, T-shirts, Jeans and Jackets"
+    let reduxdata = useSelector(storeData => storeData);
+    // console.log(reduxdata)
     let arr1 = [r11, r12, r13];
     let arr3 = [denimjacket, innerwear, cap, sneaker]
     let arr4 = [jeanfit1, jeanfit2, jeanfit3, jeanfit4, jeanfit5, jeanfit6];
     //https://jackandjones.onrender.com
-    let arr5=[ExploreMoreBrands1,ExploreMoreBrands2,ExploreMoreBrands3,ExploreMoreBrands4,ExploreMoreBrands5]
+    let arr5 = [ExploreMoreBrands1, ExploreMoreBrands2, ExploreMoreBrands3, ExploreMoreBrands4, ExploreMoreBrands5]
     const [jeanfit, setJeanfit] = useState(0);
     const [state, setState] = useState(0);
     useEffect(() => {
@@ -74,49 +75,57 @@ export default function LandingPage() {
             <div>
                 <h2 style={{ fontSize: "38px", textAlign: "center", marginTop: "20px" }}>JEANS FIT GUIDE</h2>
             </div>
-            <div style={{ display: 'flex', justifyContent: "space-between", width: "80%", margin: 'auto' }}>
-                <button onClick={() => {
-                    if (jeanfit == 0) {
-                        setJeanfit(3)
-                    } else {
-                        setJeanfit(jeanfit - 1)
-                    }
-                }} style={{ fontSize: "40px", cursor: "pointer" }}>&lt;</button>
+            <div className={style.jeanfitguideDiv}>
+                <div>
+                    <button onClick={() => {
+                        if (jeanfit == 0) {
+                            setJeanfit(3)
+                        } else {
+                            setJeanfit(jeanfit - 1)
+                        }
+                    }} style={{ fontSize: "40px", cursor: "pointer", position: 'relative', top: "50%" }}>&lt;</button>
+                </div>
                 {arr4.map((el, i) => {
                     if (i >= jeanfit && i <= jeanfit + 2) {
-                        return <img style={{ width: "337px", height: "406.7px" }} src={el} />
+                        return <div key={i + 1}><img style={{ width: "337px", height: "406.7px" }} src={el} /></div>
                     }
                 })}
-                <button onClick={() => {
-                    if (jeanfit == 3) {
-                        setJeanfit(0)
-                    } else {
-                        setJeanfit(jeanfit + 1)
-                    }
-                }} style={{ fontSize: "40px", cursor: "pointer" }}>&gt;</button>
-            </div>
-            <div style={{backgroundColor:"rgb(0,40,85)",marginTop:"-7%",paddingBottom:"15px"}}>
-            <div style={{width:"72%",margin:"auto",paddingTop:"13%"}}>
-                <ReactPlayer url={video1} height='100%' width='100%' controls='true'/>
-            </div>
-            </div>
-            <div><h2 style={{ fontSize: "38px", textAlign: "center"}}>Explore More Brands</h2>
-            <div style={{display:'grid',gridTemplateColumns:"30% 30% 30%",justifyContent:"center",marginTop:"20px"}}>
-                <div><img src={ExploreMoreBrands1}/></div>
-                <div><img src={ExploreMoreBrands2}/></div>
-                <div><img src={ExploreMoreBrands3}/></div>  
-            </div>
-            <div style={{display:'grid',gridTemplateColumns:"30% 30% ",justifyContent:"center",marginTop:"20px"}}>
-                <div><img src={ExploreMoreBrands4}/></div>
-                <div><img src={ExploreMoreBrands5}/></div>   
-
-            </div>
-            </div>
-            <div style={{border:"1px solid black",margin:'auto', marginTop:"30px",width:"70%"}}></div>
-                <div style={{display:"flex",justifyContent:"space-evenly",marginTop:"20px",marginBottom:"20px"}}>
-                    <img src={storeLocator}/>
-                    <img src={Insta}/>
+                <div>
+                    <button onClick={() => {
+                        if (jeanfit == 3) {
+                            setJeanfit(0)
+                        } else {
+                            setJeanfit(jeanfit + 1)
+                        }
+                    }} style={{ fontSize: "40px", cursor: "pointer", position: 'relative', top: "50%" }}>&gt;</button>
                 </div>
             </div>
-            )
+            <div style={{ backgroundColor: "rgb(0,40,85)", marginTop: "-7%", paddingBottom: "15px" }}>
+                <div style={{ width: "72%", margin: "auto", paddingTop: "13%" }}>
+                    <ReactPlayer url={video1} height='100%' width='100%' controls='true' />
+                </div>
+            </div>
+            <div><h2 style={{ fontSize: "38px", textAlign: "center" }}>Explore More Brands</h2>
+                <div style={{ display: 'grid', gridTemplateColumns: "30% 30% 30%", justifyContent: "center", marginTop: "20px" }}>
+                    <div><img src={ExploreMoreBrands1} /></div>
+                    <div><img src={ExploreMoreBrands2} /></div>
+                    <div><img src={ExploreMoreBrands3} /></div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: "30% 30% ", justifyContent: "center", marginTop: "20px" }}>
+                    <div><img src={ExploreMoreBrands4} /></div>
+                    <div><img src={ExploreMoreBrands5} /></div>
+
+                </div>
+            </div>
+            <div style={{ border: "1px solid black", margin: 'auto', marginTop: "30px", width: "70%" }}></div>
+            <div style={{ display: "flex", justifyContent: "space-evenly", marginTop: "20px", marginBottom: "20px" }}>
+                <div>
+                    <img src={storeLocator} />
+                </div>
+                <div>
+                    <img src={Insta} />
+                </div>
+            </div>
+        </div>
+    )
 }

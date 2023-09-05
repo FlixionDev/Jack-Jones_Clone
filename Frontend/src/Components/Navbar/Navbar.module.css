@@ -1,7 +1,7 @@
 .menulistDiv{
     display: flex;
     justify-content: space-around;
-    width: 55%;
+    width: 70%;
     margin: auto;
     font-size: 12px;
     font-weight: bolder;
@@ -19,6 +19,13 @@
 }
 .NavbarUpperSectionRightPart{
     display: flex;
-    justify-content: space-around;
-    width: 40%;
+    gap: 10px;
+    /* justify-content: space-around; */
+    /* width: 40%; */
 }
+
+@media only screen and (min-width: 200px) and (max-width: 800px)  {
+    .menulistDiv{
+        width: 100%;
+    }
+    }

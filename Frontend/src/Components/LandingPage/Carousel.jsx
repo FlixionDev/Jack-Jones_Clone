@@ -20,7 +20,7 @@ export default function Carousel() {
   return (
     <div>
         <div style={{marginTop:"15px"}}>
-                <img src={arr2[state]} />
+                <img style={{width:'100%'}} src={arr2[state]} />
             </div>
     </div>
   )

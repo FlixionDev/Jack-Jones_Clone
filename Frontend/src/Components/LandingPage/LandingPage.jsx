@@ -55,20 +55,20 @@ export default function LandingPage() {
     return (
         <div>
             <div>
-                <img src={arr1[state]} />
+                <img style={{width:"100%"}} src={arr1[state]} />
             </div>
             <div>
                 <Carousel />
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", marginTop: "15px" }}>
-                <div><img style={{ margin: 'auto' }} src={tshirt} /></div>
-                <div><img style={{ margin: 'auto' }} src={jean} /></div>
-                <div><img style={{ margin: 'auto' }} src={shirt} /></div>
+                <div className='divInnerImgLandingPage'><img style={{ margin: 'auto' }} src={tshirt} /></div>
+                <div className='divInnerImgLandingPage'><img style={{ margin: 'auto' }} src={jean} /></div>
+                <div className='divInnerImgLandingPage'><img style={{ margin: 'auto' }} src={shirt} /></div>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "35% 35%", justifyContent: "center", gap: "40px", marginTop: "30px" }}>
                 {
                     arr3.map((el, i) => {
-                        return <div key={i + 1}><img src={el} /></div>
+                        return <div className='divInnerImgLandingPage' key={i + 1}><img src={el} /></div>
                     })
                 }
             </div>
@@ -87,7 +87,7 @@ export default function LandingPage() {
                 </div>
                 {arr4.map((el, i) => {
                     if (i >= jeanfit && i <= jeanfit + 2) {
-                        return <div key={i + 1}><img style={{ width: "337px", height: "406.7px" }} src={el} /></div>
+                        return <div key={i + 1} className='divInnerImgLandingPage'><img style={{ width: "337px", height: "406.7px" }} src={el} /></div>
                     }
                 })}
                 <div>
@@ -107,22 +107,22 @@ export default function LandingPage() {
             </div>
             <div><h2 style={{ fontSize: "38px", textAlign: "center" }}>Explore More Brands</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: "30% 30% 30%", justifyContent: "center", marginTop: "20px" }}>
-                    <div><img src={ExploreMoreBrands1} /></div>
-                    <div><img src={ExploreMoreBrands2} /></div>
-                    <div><img src={ExploreMoreBrands3} /></div>
+                    <div className='divInnerImgLandingPage'><img src={ExploreMoreBrands1} /></div>
+                    <div className='divInnerImgLandingPage'><img src={ExploreMoreBrands2} /></div>
+                    <div className='divInnerImgLandingPage'><img src={ExploreMoreBrands3} /></div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: "30% 30% ", justifyContent: "center", marginTop: "20px" }}>
-                    <div><img src={ExploreMoreBrands4} /></div>
-                    <div><img src={ExploreMoreBrands5} /></div>
+                    <div className='divInnerImgLandingPage'><img src={ExploreMoreBrands4} /></div>
+                    <div className='divInnerImgLandingPage'><img src={ExploreMoreBrands5} /></div>
 
                 </div>
             </div>
             <div style={{ border: "1px solid black", margin: 'auto', marginTop: "30px", width: "70%" }}></div>
             <div style={{ display: "flex", justifyContent: "space-evenly", marginTop: "20px", marginBottom: "20px" }}>
-                <div>
+                <div className='divInnerImgLandingPage'>
                     <img src={storeLocator} />
                 </div>
-                <div>
+                <div className='divInnerImgLandingPage'>
                     <img src={Insta} />
                 </div>
             </div>

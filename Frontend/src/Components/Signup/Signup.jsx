@@ -15,7 +15,7 @@ export default function Signup() {
   const navigate = useNavigate();
   const registerUser = () => {
     if (state.name != "" && state.email != "" && state.mobile != "" && state.pass != "" && state.dob != "") {
-      fetch(`https://glamorous-ring-newt.cyclic.app/users/register`, {
+      fetch(`https://backendserverjackjones.onrender.com/users/register`, {
         method: "POST",
         body: JSON.stringify(state),
         headers: {

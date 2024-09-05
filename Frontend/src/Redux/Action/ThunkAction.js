@@ -2,7 +2,7 @@ export const thunkKidsAction=()=>{
     return (dispatch,getState)=>{
         let kidsData=getState().kids;
         const fetchKidsData=()=>{
-            fetch(`https://glamorous-ring-newt.cyclic.app/products/kids`).then((res) => { return res.json() }).then((res) => { dispatch({
+            fetch(`https://backendserverjackjones.onrender.com/products/kids`).then((res) => { return res.json() }).then((res) => { dispatch({
                 type:"kids",
                 payload:res
             }) })
@@ -18,7 +18,7 @@ export const thunkLoungewearAction=()=>{
     return (dispatch,getState)=>{
         let loungewearData=getState().loungewear;
         const fetchloungewearData=()=>{
-            fetch("https://glamorous-ring-newt.cyclic.app/products/loungewears").then((res)=>res.json()).then((res)=>{
+            fetch("https://backendserverjackjones.onrender.com/products/loungewears").then((res)=>res.json()).then((res)=>{
                 dispatch({
                     type:"loungewear",
                     payload:res
@@ -36,7 +36,7 @@ export const thunkNewinAction=()=>{
     return (dispatch,getState)=>{
         let newinData=getState().newin;
         const fetchnewinData=()=>{
-            fetch("https://glamorous-ring-newt.cyclic.app/products/new_ins").then((res)=>res.json()).then((res)=>{
+            fetch("https://backendserverjackjones.onrender.com/products/new_ins").then((res)=>res.json()).then((res)=>{
                 dispatch({
                     type:"newin",
                     payload:res
@@ -53,7 +53,7 @@ export const thunkSalesAction=()=>{
     return (dispatch,getState)=>{
         let salesData=getState().sales;
         const fetchSalesData=()=>{
-            fetch("https://glamorous-ring-newt.cyclic.app/products/sales").then((res)=>res.json()).then((res)=>{
+            fetch("https://backendserverjackjones.onrender.com/products/sales").then((res)=>res.json()).then((res)=>{
                 dispatch({
                     type:"sales",
                     payload:res

@@ -24,7 +24,7 @@ export default function Login() {
   const dispatch = useDispatch();
   let isLoginAction = bindActionCreators(thunkUserLoginDone, dispatch);
   const submitDataForLogin = () => {
-    fetch(`https://glamorous-ring-newt.cyclic.app/users/login`,{
+    fetch(`https://backendserverjackjones.onrender.com/users/login`,{
       method:"POST",
       body:JSON.stringify(credential),
       headers:{

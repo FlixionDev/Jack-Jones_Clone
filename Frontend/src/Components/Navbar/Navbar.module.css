@@ -1,31 +1,30 @@
-.menulistDiv{
+.menulistDiv {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     width: 70%;
     margin: auto;
     font-size: 12px;
     font-weight: bolder;
 }
-.NavbarDiv{
-    position: sticky;
-    top: 0;
-    background-color: white;
-}
-.NavbarUpperSection{
+
+.NavbarUpperSection {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 15px;
-}
-.NavbarUpperSectionRightPart{
-    display: flex;
-    gap: 10px;
-    /* justify-content: space-around; */
-    /* width: 40%; */
+    padding: 15px;
+    flex-wrap: wrap;
 }
 
-@media only screen and (min-width: 200px) and (max-width: 800px)  {
-    .menulistDiv{
-        width: 100%;
+.NavbarDiv {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
+}
+
+@media only screen and (max-width: 768px) {
+    .menulistDiv {
+        display: none;
     }
-    }
+}

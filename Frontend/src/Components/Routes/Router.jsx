@@ -1,5 +1,5 @@
-import React,{Suspense} from 'react'
-import { Route,Routes } from 'react-router-dom'
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
 import LandingPage from '../LandingPage/LandingPage'
@@ -22,31 +22,33 @@ import Payment from '../Payment/Payment'
 export default function Router() {
   return (
     <div>
-        <Routes>
-            <Route path='/' element={<><Navbar/><LandingPage/><Footer/></>}/>
-            <Route path='/register' element={<><Navbar/><Signup/><Footer/></>}/>
-            <Route path='/login' element={<><Navbar/><Login/><Footer/></>}/>
-            <Route path='/accessories' element={<><Navbar/><Accessories /><Footer/></>}/>
-            <Route path='/accessories/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
-            <Route path='/clothings' element={<><Navbar/><Clothing/><Footer/></>}/>
-            <Route path='/clothings/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
-            <Route path='/footwears' element={<><Navbar/><Footwear/><Footer/></>}/>
-            <Route path='/footwears/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
-            <Route path='/innerwears' element={<><Navbar/><Innerwear/><Footer/></>}/>
-            <Route path='/innerwears/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
-            <Route path='/kids' element={<><Navbar/><Kids/><Footer/></>}/>
-            <Route path='/kids/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
-            <Route path='/loungewears' element={<><Navbar/><Loungewear/><Footer/></>}/>
-            <Route path='/loungewears/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
-            <Route path='/new_in' element={<><Navbar/><Newin/><Footer/></>}/>
-            <Route path='/new_in/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
-            <Route path='/sales' element={<><Navbar/><Sales/><Footer/></>}/>
-            <Route path='/sales/:id'element={<><Navbar/><ProductDescription/><Footer/></>}/>
-            <Route path='/cart' element={<><Navbar/><PrivateRoute><Cart/></PrivateRoute><Footer/></>}/>
-            <Route path='/checkout' element={<><Navbar/><PrivateRoute><Checkout/></PrivateRoute><Footer/></>}/>
-            <Route path='/payment' element={<><PrivateRoute><Payment/></PrivateRoute></>}/>
-            <Route path='*' element={<><Navbar/><h2>404, Page not found</h2><Footer/></>}/>
-        </Routes>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/register' element={<Signup />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/accessories' element={<Accessories />} />
+        <Route path='/accessories/:id' element={<ProductDescription />} />
+        <Route path='/clothings' element={<Clothing />} />
+        <Route path='/clothings/:id' element={<ProductDescription />} />
+        <Route path='/footwears' element={<Footwear />} />
+        <Route path='/footwears/:id' element={<ProductDescription />} />
+        <Route path='/innerwears' element={<Innerwear />} />
+        <Route path='/innerwears/:id' element={<ProductDescription />} />
+        <Route path='/kids' element={<Kids />} />
+        <Route path='/kids/:id' element={<ProductDescription />} />
+        <Route path='/loungewears' element={<Loungewear />} />
+        <Route path='/loungewears/:id' element={<ProductDescription />} />
+        <Route path='/new_in' element={<Newin />} />
+        <Route path='/new_in/:id' element={<ProductDescription />} />
+        <Route path='/sales' element={<Sales />} />
+        <Route path='/sales/:id' element={<ProductDescription />} />
+        <Route path='/cart' element={<PrivateRoute><Cart /></PrivateRoute>} />
+        <Route path='/checkout' element={<PrivateRoute><Checkout /></PrivateRoute>} />
+        <Route path='/payment' element={<PrivateRoute><Payment /></PrivateRoute>} />
+        <Route path='*' element={<h2>404, Page not found</h2>} />
+      </Routes>
+      <Footer />
     </div>
   )
 }

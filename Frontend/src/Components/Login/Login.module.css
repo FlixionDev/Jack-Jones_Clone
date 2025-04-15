@@ -1,7 +1,32 @@
 .SignupContainer {
-    width: 30%;
+    width: 40%;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    max-width: 500px;
+}
+
+@media (max-width: 481px) {
+    .SignupContainer {
+        width: 90%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .SignupContainer {
+        width: 70%;
+    }
+}
+
+@media (min-width: 769px) {
+    .SignupContainer {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1025px) {
+    .SignupContainer {
+        width: 40%;
+    }
 }

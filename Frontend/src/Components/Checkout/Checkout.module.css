@@ -1,7 +1,19 @@
-.addressTag{
+.addressTag {
     border: 1px solid grey;
     width: 80%;
     height: 40px;
     outline: none;
     padding: 5px;
+}
+
+.checkPageRootContainer {
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+@media (max-width: 768px) {
+    .checkPageRootContainer {
+        grid-template-columns: 100%;
+        margin-bottom: 16px;
+    }
 }

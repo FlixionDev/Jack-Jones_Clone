@@ -8,26 +8,26 @@ import style from '../Checkout/Checkout.module.css'
 import { useNavigate } from 'react-router-dom'
 export default function Checkout() {
   const cartItem = useSelector((storeData) => storeData.cart)
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [addressCheck, setAddressCheck] = useState("existAdd");
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
   const [state, setState] = useState(false)
-  const [address,setAddress]=useState({
-    fname:"",
-    lname:"",
-    addLine1:"",
-    addLine2:"",
-    postcode:"",
-    city:"",
-    state:"",
-    country:"india"
+  const [address, setAddress] = useState({
+    fname: "",
+    lname: "",
+    addLine1: "",
+    addLine2: "",
+    postcode: "",
+    city: "",
+    state: "",
+    country: "india"
   })
-  const [listaddress,setListaddress]=useState("");
+  const [listaddress, setListaddress] = useState("");
   useEffect(() => {
-    let discountAmt=0;
-    if(sessionStorage.getItem("coupon")=="NEW100"){
-      discountAmt=-100;
+    let discountAmt = 0;
+    if (sessionStorage.getItem("coupon") == "NEW100") {
+      discountAmt = -100;
     }
     setTotalPrice(cartItem.reduce((total, el) => {
       if (el.price) {
@@ -37,62 +37,62 @@ export default function Checkout() {
       }
     }, discountAmt))
   }, [state])
-  useEffect(()=>{
-    fetch("https://glamorous-ring-newt.cyclic.app/address",{
-      headers:{
-        "Authorization":sessionStorage.getItem("token")
+  useEffect(() => {
+    fetch("https://backendserverjackjones.onrender.com/address", {
+      headers: {
+        "Authorization": sessionStorage.getItem("token")
       }
-    }).then(res=>res.json()).then((res)=>{
+    }).then(res => res.json()).then((res) => {
       setListaddress(res)
-      if(res.length > 0){
-      sessionStorage.setItem("selectedAddress",JSON.stringify(res[0]))
+      if (res.length > 0) {
+        sessionStorage.setItem("selectedAddress", JSON.stringify(res[0]))
       }
-    }).catch(err=>console.log(err))
-  },[])
-  // console.log(listaddress)
+    }).catch(err => console.log(err))
+  }, [])
+
   let cartProductDelete = bindActionCreators(deleteCartProduct, dispatch);
   const removeProduct = (ind) => {
     cartProductDelete(ind);
     setState(!state)
   }
-  const submitAddress=()=>{
-    if(address.fname!="" && address.lname!="" && address.addLine1!="" && address.addLine2!="" && address.postcode!="" && address.city!="" && address.state!="" && address.country!=""){
-      sessionStorage.setItem("selectedAddress",JSON.stringify(address))
-      fetch(`https://glamorous-ring-newt.cyclic.app/address/`,{
-        method:"POST",
-        body:JSON.stringify(address),
-        headers:{
-          "Authorization":sessionStorage.getItem("token"),
-          "Content-Type":"application/json"
+  const submitAddress = () => {
+    if (address.fname != "" && address.lname != "" && address.addLine1 != "" && address.addLine2 != "" && address.postcode != "" && address.city != "" && address.state != "" && address.country != "") {
+      sessionStorage.setItem("selectedAddress", JSON.stringify(address))
+      fetch(`https://backendserverjackjones.onrender.com/address/`, {
+        method: "POST",
+        body: JSON.stringify(address),
+        headers: {
+          "Authorization": sessionStorage.getItem("token"),
+          "Content-Type": "application/json"
         }
-      }).then(res=>res.json()).then((res)=>{
+      }).then(res => res.json()).then((res) => {
         console.log(res)
         navigate("/payment")
-      }).catch((err)=>console.log(err))
+      }).catch((err) => console.log(err))
     }
   }
-  const proceedToPayment=()=>{
+  const proceedToPayment = () => {
     navigate("/payment")
   }
   return (
     <div>
-      <div style={{ display: "grid", gridTemplateColumns: "60% 40%" }}>
-        <div style={{ padding:"20px" }}>
+      <div className={style.checkPageRootContainer}>
+        <div style={{ padding: "20px" }}>
           <h1 style={{ textAlign: "center", color: "#444", fontSize: "30px" }}>Address</h1>
           <p>Delivery Details</p>
           <div><input type='radio' name='address' id='existAddress' onChange={() => { setAddressCheck("existAdd") }} defaultChecked value='existAddress' /> I want to use an existing address</div>
           {
             addressCheck === "existAdd" ? <div>
-              <select onChange={(e)=>{sessionStorage.setItem("selectedAddress",JSON.stringify(e.target.value))}} style={{width:"100%", border: "1px solid grey",height: "40px",outline: "none",padding: "5px"}}>
+              <select onChange={(e) => { sessionStorage.setItem("selectedAddress", JSON.stringify(e.target.value)) }} style={{ width: "100%", border: "1px solid grey", height: "40px", outline: "none", padding: "5px" }}>
                 {/* {
                   listaddress.length > 0 ? <option value="">Please select address</option> : ""
                 } */}
                 {
-                  listaddress.length > 0 ? 
-                    listaddress.map((el,ind)=>{
-                      return <option key={ind+1} value={el.addLine1 +", "+ el.addLine2 +", "+ el.city +", "+ el.postcode +", "+ el.state +", "+ el.country}>{el.addLine1 +", "+ el.addLine2 +", "+ el.city +", "+ el.postcode +", "+ el.state +", "+ el.country}</option>
+                  listaddress.length > 0 ?
+                    listaddress.map((el, ind) => {
+                      return <option key={ind + 1} value={el.addLine1 + ", " + el.addLine2 + ", " + el.city + ", " + el.postcode + ", " + el.state + ", " + el.country}>{el.addLine1 + ", " + el.addLine2 + ", " + el.city + ", " + el.postcode + ", " + el.state + ", " + el.country}</option>
                     })
-                   : <option value=''>No saved address found</option>
+                    : <option value=''>No saved address found</option>
                 }
               </select>
             </div> : null
@@ -102,31 +102,31 @@ export default function Checkout() {
             addressCheck === "newAdd" ? <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)" }}>
               <div>
                 <label>* first name</label><br />
-                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,fname:e.target.value})}} type="text" />
+                <input className={style.addressTag} onChange={(e) => { setAddress({ ...address, fname: e.target.value }) }} type="text" />
               </div>
               <div>
                 <label>* last name</label><br />
-                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,lname:e.target.value})}}  type="text" />
+                <input className={style.addressTag} onChange={(e) => { setAddress({ ...address, lname: e.target.value }) }} type="text" />
               </div>
               <div>
                 <label>* Address line 1</label><br />
-                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,addLine1:e.target.value})}} type="text" />
+                <input className={style.addressTag} onChange={(e) => { setAddress({ ...address, addLine1: e.target.value }) }} type="text" />
               </div>
               <div>
                 <label>* Address line 2</label><br />
-                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,addLine2:e.target.value})}} type="text" />
+                <input className={style.addressTag} onChange={(e) => { setAddress({ ...address, addLine2: e.target.value }) }} type="text" />
               </div>
               <div>
                 <label>* Postal code</label><br />
-                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,postcode:e.target.value})}} type="text" />
+                <input className={style.addressTag} onChange={(e) => { setAddress({ ...address, postcode: e.target.value }) }} type="text" />
               </div>
               <div>
                 <label>* City</label><br />
-                <input className={style.addressTag} onChange={(e)=>{setAddress({...address,city:e.target.value})}} type="text" />
+                <input className={style.addressTag} onChange={(e) => { setAddress({ ...address, city: e.target.value }) }} type="text" />
               </div>
               <div>
                 <label>* State</label><br />
-                <select id="country-state" className={style.addressTag} onChange={(e)=>{setAddress({...address,state:e.target.value})}} name="country-state">
+                <select id="country-state" className={style.addressTag} onChange={(e) => { setAddress({ ...address, state: e.target.value }) }} name="country-state">
                   <option value="">Select state</option>
                   <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                   <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -169,17 +169,17 @@ export default function Checkout() {
               </div>
               <div>
                 <label>* Country</label><br />
-                <select className={style.addressTag} onChange={(e)=>{setAddress({...address,country:e.target.value})}}>
+                <select className={style.addressTag} onChange={(e) => { setAddress({ ...address, country: e.target.value }) }}>
                   <option value="india">India</option>
                 </select>
               </div>
             </div> : null
           }
           <div style={{}}>
-            <button style={{ backgroundColor: "#002855", color: "white",padding:"7px",margin:"15px 0" }} onClick={addressCheck=="existAdd" ? proceedToPayment : submitAddress}>Continue</button>
+            <button style={{ backgroundColor: "#002855", color: "white", padding: "7px", margin: "15px 0" }} onClick={addressCheck == "existAdd" ? proceedToPayment : submitAddress}>Continue</button>
           </div>
         </div>
-        <div style={{  }}>
+        <div style={{}}>
           <div style={{ background: '#faf9f8', height: '100%', maxHeight: "600px", overflow: "scroll" }}>
             {
               cartItem.length > 0 ?

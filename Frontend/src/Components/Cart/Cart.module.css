@@ -1,18 +1,21 @@
-.root{
+.root {
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 60% 40%;
     margin: 1rem;
     gap: 10px;
 }
-.bTag{
+
+.bTag {
     color: #333333;
     font-size: 14px;
 }
-.QuantitySelectTag{
+
+.QuantitySelectTag {
     border: 1px solid black;
     font-size: 14px;
 }
-.totalSubTotalDiv{
+
+.totalSubTotalDiv {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,30 +23,36 @@
     margin-left: 8px;
     margin-right: 8px;
 }
-b+p{
+
+b+p {
     color: blue;
     font-size: 14px;
 }
-.h5{
+
+.h5 {
     font-size: 14px;
     margin: 10px 0;
     margin-left: 8px;
     margin-right: 8px;
 }
-.couponInput{
+
+.couponInput {
     border: 1px solid black;
     width: 70%;
     padding: 5px;
 }
-.applyCouponBtn{
+
+.applyCouponBtn {
     background-color: #002855;
     color: white;
     width: 30%;
     padding: 6px;
     border-radius: 0 7px 7px 0;
-    
+    min-width: 140px;
+
 }
-.buyNowBtn{
+
+.buyNowBtn {
     width: 100%;
     background-color: #002855;
     color: white;
@@ -51,4 +60,10 @@ b+p{
     padding: 7px;
     font-size: 14px;
     border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .root {
+        grid-template-columns: 100%;
+    }
 }

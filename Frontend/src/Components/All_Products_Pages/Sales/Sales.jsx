@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react';
 import ProductCard from '../../ProductCard/ProductCard';
-import style from './Sales.module.css'
+import { Box, SimpleGrid } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { thunkSalesAction } from '../../../Redux/Action/ThunkAction';
 export default function Sales() {
   let productData = useSelector((storeData) => storeData.sales);
   const dispatch = useDispatch();
-  document.title="Mens Clothing - Upto 50% Off on Shirts, T-shirts, Jeans, Jackets, Footwear & Innerwear |  JACK&JONES "
+  document.title = "Mens Clothing - Upto 50% Off on Shirts, T-shirts, Jeans, Jackets, Footwear & Innerwear |  JACK&JONES "
   useEffect(() => {
-    //fetchProduct("https://curious-hare-jewelry.cyclic.app/sales");
     let salesthunk = bindActionCreators(thunkSalesAction, dispatch);
     salesthunk();
   }, [])
-  const fetchProduct = (url) => {
-    fetch(`${url}`).then((res) => { return res.json() }).then((res) => { setState(res) })
-  }
 
   return (
-    <div className={style.CollectionDiv}>
+    <Box maxW="97%" mx="auto">
       <h1 style={{ font: '24px', padding: "10px 10px 20px 0" }}>UP TO 50%  {productData.length > 1 ? <span style={{ color: 'gray' }}>{productData.length + 1}</span> : null}</h1>
-      {
-        productData.length > 0 ? <div className={style.ProductCardDiv}>
-          {
-            productData.map((el, i) => {
-              return <div key={i + 1}><ProductCard {...el} /></div>
-            })
-          }
-        </div> : null
-      }
-    </div>
+      {productData.length > 0 && (
+        <SimpleGrid
+          columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+          spacing={{ base: 4, md: 6 }}
+        >
+          {productData.map((el, i) => (
+            <Box key={i + 1}>
+              <ProductCard {...el} />
+            </Box>
+          ))}
+        </SimpleGrid>
+      )}
+    </Box>
   )
 }

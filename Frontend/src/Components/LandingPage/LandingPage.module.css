@@ -1,9 +1,0 @@
-.jeanfitguideDiv{
-    display: flex;
-    justify-content: space-between;
-    gap: 21px;
-    /* width: 98%; */
-    margin: auto;
-    margin-left: 15px;
-    margin-right: 15px;
-}

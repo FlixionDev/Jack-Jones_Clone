@@ -51,7 +51,7 @@ export default function Navbar() {
 
   return (
     <>
-      <Box bg="white" position="sticky" top={0} p={4} >
+      <Box bg="white" position="sticky" top={0} p={4} zIndex="10">
         <Flex justify="space-between" align="center" flexWrap="wrap">
           <Flex align="center" justify="space-between" w="100%" mb={{ base: 2, md: 0 }}>
             {isMobile && (<Link to="/">

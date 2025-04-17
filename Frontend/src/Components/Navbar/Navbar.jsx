@@ -45,6 +45,10 @@ export default function Navbar() {
     let isLoginAction = bindActionCreators(thunkUserLoginDone, dispatch);
     sessionStorage.setItem("isLogin", false);
     sessionStorage.removeItem("userDetails");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("isLogin");
+    sessionStorage.removeItem("coupon");
+    sessionStorage.removeItem("selectedAddress");
     isLoginAction();
     toast({ position: "top", description: 'Logout successfully!', status: "success", isClosable: true });
   };
